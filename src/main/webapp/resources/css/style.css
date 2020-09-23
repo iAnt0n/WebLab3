@@ -1,0 +1,180 @@
+html {
+    height: 100%;
+    font-size: 18px;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    background: teal;
+    color: white;
+}
+
+.text-box-right {
+    text-align: right;
+}
+
+.main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+    text-align: center;
+    background-color: teal;
+    vertical-align: center;
+}
+
+.flex-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.graph:hover {
+    box-shadow: 0 0 10px teal;
+}
+
+.input-text {
+    border: 2px solid gray;
+    border-radius: 10%;
+}
+
+.input-text:focus {
+    outline: none;
+}
+
+.input-select {
+    border: 2px solid gray;
+    border-radius: 10%;
+}
+
+.input-select:focus {
+    outline: none;
+}
+
+.radio-button {
+    text-align: center;
+}
+
+input[type="radio"]{
+    vertical-align: top;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+.submit-button {
+    background-color: teal;
+    color: white;
+    border-radius: 10%;
+}
+
+.neutral {
+    color: gray;
+    border-color: gray;
+}
+
+.invalid {
+    color: #8b3838;
+    border-color: #8b3838;
+}
+
+.valid {
+    color: teal;
+    border-color: teal;
+}
+
+.content {
+    margin: 0.5rem;
+}
+
+#time {
+    font-size: 3rem;
+    background-color: rgb(217,142,142);
+    border: 1px solid rgb(217,142,142);
+    border-radius: 10%;
+    font-family: monospace;
+    padding: 0 1%;
+}
+
+#date {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: rgb(217,142,142);
+    border: 1px solid rgb(217,142,142);
+    border-radius: 0 0 10% 10%;
+    font-family: monospace;
+    padding: 0 1%;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.ui-slider {
+    margin: 0.5rem;
+}
+
+.ui-slider .ui-slider-handle {
+    background-color: teal;
+    box-shadow: none;
+}
+
+.ui-datatable {
+    text-align: center;
+}
+
+.ui-datatable-even {
+    background-color: rgb(217,142,142);
+    color: white;
+    border-color: #8b3838;
+}
+
+.ui-datatable-odd {
+    background: rgb(217,142,142);
+    color: white;
+    border-color: #8b3838;
+}
+
+.ui-datatable-even {
+    background: rgb(217,142,142);
+    color: white;
+    border-color: #8b3838;
+}
+
+.ui-sortable-column {
+    background: rgb(217,142,142);
+    color: white;
+    border-color: #8b3838;
+    box-shadow: none;
+}

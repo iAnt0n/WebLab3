@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <div class="main flex-vertical flex-centered">
+        <div class="centered-text">
+            <span id="time">
+
+            </span>
+        </div>
+        <div class="centered-text">
+            <span id="date">
+
+            </span>
+        </div>
+        <div class="centered-text content">
+            <h:button styleClass="submit-button" value="Main page" outcome="content"/>
+        </div>
+    </div>
+    <h:outputScript library="js" name="time.js"/>
+</ui:composition>

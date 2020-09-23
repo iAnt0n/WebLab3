@@ -1,0 +1,181 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <section class="main">
+        <section class="flex-evenly wrap">
+            <svg class="graph content" height="400" width="400" id="graph" xmlns="http://www.w3.org/2000/svg">
+                <line class="axis" stroke="black" x1="0" x2="400" y1="200" y2="200"/>
+                <line class="axis" stroke="black" x1="200" x2="200" y1="0" y2="400"/>
+
+                <line class="arrow" stroke="black" x1="390" x2="400" y1="195" y2="200"/>
+                <line class="arrow" stroke="black" x1="390" x2="400" y1="205" y2="200"/>
+
+                <line class="arrow" stroke="black" x1="195" x2="200" y1="10" y2="0"/>
+                <line class="arrow" stroke="black" x1="200" x2="205" y1="0" y2="10"/>
+
+                <line class="point-line" stroke="black" x1="20" x2="20" y1="195" y2="205"/>
+                <line class="point-line" stroke="black" x1="110" x2="110" y1="195" y2="205"/>
+                <line class="point-line" stroke="black" x1="290" x2="290" y1="195" y2="205"/>
+                <line class="point-line" stroke="black" x1="380" x2="380" y1="195" y2="205"/>
+
+                <line class="point-line" stroke="black" x1="195" x2="205" y1="20" y2="20"/>
+                <line class="point-line" stroke="black" x1="195" x2="205" y1="110" y2="110"/>
+                <line class="point-line" stroke="black" x1="195" x2="205" y1="290" y2="290"/>
+                <line class="point-line" stroke="black" x1="195" x2="205" y1="380" y2="380"/>
+
+                <text class="point-text" x="10" y="190">-R</text>
+                <text class="point-text" x="100" y="190">-R/2</text>
+                <text class="point-text" x="285" y="190">R/2</text>
+                <text class="point-text" x="375" y="190">R</text>
+                <text class="point-text" x="207" y="385">-R</text>
+                <text class="point-text" x="207" y="295">-R/2</text>
+                <text class="point-text" x="207" y="115">R/2</text>
+                <text class="point-text" x="207" y="25">R</text>
+
+                <polygon class="rectangle-graph" fill="teal"
+                         fill-opacity="0.3" points="20,200 20,110 200,110 200,200" stroke="teal"/>
+                <polygon class="triangle-graph" fill="teal"
+                         fill-opacity="0.3" points="290,200 200,290 200,200" stroke="teal"/>
+                <path class="circle-graph" d="M 20 200 A 180 180 0 0 0 200 380 L 200 200 Z"
+                      fill="teal" fill-opacity="0.3" stroke="teal"/>
+            </svg>
+
+            <h:form id="form" class="flex-evenly flex-vertical content">
+                <div class="input-field">
+                    <span class="input-header">X value</span>
+                    <div class="flex-centered">
+                        <h:commandLink value="-5" action="#{pointListBean.point.setX(-5)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="-4" action="#{pointListBean.point.setX(-4)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="-3" action="#{pointListBean.point.setX(-3)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="-2" action="#{pointListBean.point.setX(-2)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="-1" action="#{pointListBean.point.setX(-1)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="0" action="#{pointListBean.point.setX(0)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="1" action="#{pointListBean.point.setX(1)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="2" action="#{pointListBean.point.setX(2)}">
+                            <f:ajax/>
+                        </h:commandLink>
+
+                        <h:commandLink value="3" action="#{pointListBean.point.setX(3)}">
+                            <f:ajax/>
+                        </h:commandLink>
+                        <h:inputHidden id="x-input" value="#{pointListBean.point.x}" widgetVar="x-input">
+                            <f:converter converterId="javax.faces.Double"/>
+                        </h:inputHidden>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <h:outputLabel for="y-input" styleClass="input-header">Y value</h:outputLabel>
+                    <h:inputText id="y-input" value="#{pointListBean.point.y}" placeholder="(-3;3)" required="true"
+                                 converterMessage="Y must be a number" requiredMessage="Mandatory field"
+                                 autocomplete="off" widgetVar="y-input">
+                        <f:converter converterId="javax.faces.BigDecimal"/>
+                        <f:validator validatorId="bigDecimalValidator"/>
+                        <f:attribute name="min" value="-3"/>
+                        <f:attribute name="max" value="3"/>
+                        <f:ajax event="keyup" render="error-message"/>
+                    </h:inputText>
+                    <h:message id="error-message" for="y-input"/>
+                </div>
+
+                <div class="input-field">
+                    <span class="input-header">R value</span>
+                    <p:inputText type="hidden" id="r-input" value="#{pointListBean.point.r}">
+                        <f:converter converterId="javax.faces.Double"/>
+                    </p:inputText>
+                    <h:outputScript>
+                        function f(event, ui) {
+                            document.querySelectorAll('.target-dot').forEach(function (elem) {
+                                const r = document.getElementById('form:r-input').value;
+                                alert(r);
+                                const rescX = 200 + elem.getAttribute('data-x') * 180 / r;
+                                alert(elem.getAttribute('data-x'));
+                                const rescY = 200 - elem.getAttribute('data-y') * 180 / r;
+                                alert(rescX);
+                                elem.setAttributeNS("", 'cx', String(rescX)); //rescaling
+                                elem.setAttributeNS("", 'cy', String(rescY));
+                            });
+                        }
+                    </h:outputScript>
+                    <p:slider minValue="1" maxValue="4" step="0.5" for="r-input" display="output" onSlideEnd="f(event, ui)"/>
+
+                    <h:outputText id="output" value="#{pointListBean.point.r}"/>
+                </div>
+                <h:commandButton id="btn">
+                    <p:ajax process="@form" update="form table" listener="#{pointListBean.addPoint}"/>
+                </h:commandButton>
+            </h:form>
+        </section>
+        <section>
+            <p:dataTable id="table" styleClass="content" var="point" value="#{pointListBean.pointList}">
+                <p:column sortBy="#{point.x}">
+                    <f:facet name="header">
+                        <h:outputText value="X"/>
+                    </f:facet>
+                    <h:outputText value="#{point.x}"/>
+                </p:column>
+
+                <p:column sortBy="#{point.y}">
+                    <f:facet name="header">
+                        <h:outputText value="Y"/>
+                    </f:facet>
+                    <h:outputText value="#{point.y}"/>
+                </p:column>
+
+                <p:column sortBy="#{point.r}">
+                    <f:facet name="header">
+                        <h:outputText value="R"/>
+                    </f:facet>
+                    <h:outputText value="#{point.r}"/>
+                </p:column>
+
+                <p:column sortBy="#{point.reqTime}">
+                    <f:facet name="header">
+                        <h:outputText value="reqTime"/>
+                    </f:facet>
+                    <h:outputText value="#{point.reqTime}"/>
+                </p:column>
+
+                <p:column sortBy="#{point.compTime}">
+                    <f:facet name="header">
+                        <h:outputText value="compTime"/>
+                    </f:facet>
+                    <h:outputText value="#{point.compTime} ns"/>
+                </p:column>
+
+                <p:column sortBy="#{point.result}">
+                    <f:facet name="header">
+                        <h:outputText value="Result"/>
+                    </f:facet>
+                    <h:outputText value="#{point.result}"/>
+                </p:column>
+            </p:dataTable>
+        </section>
+    </section>
+<!--TODO allow y not from (-3;3) for svg click-->
+    <h:outputScript library="js" name="svgClick.js"/>
+    <h:outputScript library="js" name="svgPoints.js"/>
+</ui:composition>

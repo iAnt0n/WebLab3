@@ -42,54 +42,52 @@
                       fill="teal" fill-opacity="0.3" stroke="teal"/>
             </svg>
 
-            <h:form id="form" class="flex-evenly flex-vertical content">
+
+            <h:form id="form" class="flex-evenly flex-vertical content main-form">
                 <div class="input-field">
                     <span class="input-header">X value</span>
                     <div class="flex-centered">
-                        <h:commandLink value="-5" action="#{pointListBean.point.setX(-5)}">
+                        <h:commandLink styleClass="x-button" value="-5" action="#{pointListBean.point.setX(-5)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="-4" action="#{pointListBean.point.setX(-4)}">
+                        <h:commandLink styleClass="x-button" value="-4" action="#{pointListBean.point.setX(-4)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="-3" action="#{pointListBean.point.setX(-3)}">
+                        <h:commandLink styleClass="x-button" value="-3" action="#{pointListBean.point.setX(-3)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="-2" action="#{pointListBean.point.setX(-2)}">
+                        <h:commandLink styleClass="x-button" value="-2" action="#{pointListBean.point.setX(-2)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="-1" action="#{pointListBean.point.setX(-1)}">
+                        <h:commandLink styleClass="x-button" value="-1" action="#{pointListBean.point.setX(-1)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="0" action="#{pointListBean.point.setX(0)}">
+                        <h:commandLink styleClass="x-button" value="0" action="#{pointListBean.point.setX(0)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="1" action="#{pointListBean.point.setX(1)}">
+                        <h:commandLink styleClass="x-button" value="1" action="#{pointListBean.point.setX(1)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="2" action="#{pointListBean.point.setX(2)}">
+                        <h:commandLink styleClass="x-button" value="2" action="#{pointListBean.point.setX(2)}">
                             <f:ajax/>
                         </h:commandLink>
 
-                        <h:commandLink value="3" action="#{pointListBean.point.setX(3)}">
+                        <h:commandLink styleClass="x-button" value="3" action="#{pointListBean.point.setX(3)}">
                             <f:ajax/>
                         </h:commandLink>
-                        <h:inputHidden id="x-input" value="#{pointListBean.point.x}" widgetVar="x-input">
-                            <f:converter converterId="javax.faces.Double"/>
-                        </h:inputHidden>
                     </div>
                 </div>
 
                 <div class="input-field">
                     <h:outputLabel for="y-input" styleClass="input-header">Y value</h:outputLabel>
-                    <h:inputText id="y-input" value="#{pointListBean.point.y}" placeholder="(-3;3)" required="true"
+                    <h:inputText id="y-input" styleClass="input-text" value="#{pointListBean.point.y}" placeholder="(-3;3)" required="true"
                                  converterMessage="Y must be a number" requiredMessage="Mandatory field"
                                  autocomplete="off" widgetVar="y-input">
                         <f:converter converterId="javax.faces.BigDecimal"/>
@@ -98,7 +96,7 @@
                         <f:attribute name="max" value="3"/>
                         <f:ajax event="keyup" render="error-message"/>
                     </h:inputText>
-                    <h:message id="error-message" for="y-input"/>
+                    <h:message id="error-message" styleClass="error-text" for="y-input"/>
                 </div>
 
                 <div class="input-field">
@@ -106,76 +104,61 @@
                     <p:inputText type="hidden" id="r-input" value="#{pointListBean.point.r}">
                         <f:converter converterId="javax.faces.Double"/>
                     </p:inputText>
-                    <h:outputScript>
-                        function f(event, ui) {
-                            document.querySelectorAll('.target-dot').forEach(function (elem) {
-                                const r = document.getElementById('form:r-input').value;
-                                alert(r);
-                                const rescX = 200 + elem.getAttribute('data-x') * 180 / r;
-                                alert(elem.getAttribute('data-x'));
-                                const rescY = 200 - elem.getAttribute('data-y') * 180 / r;
-                                alert(rescX);
-                                elem.setAttributeNS("", 'cx', String(rescX)); //rescaling
-                                elem.setAttributeNS("", 'cy', String(rescY));
-                            });
-                        }
-                    </h:outputScript>
-                    <p:slider minValue="1" maxValue="4" step="0.5" for="r-input" display="output" onSlideEnd="f(event, ui)"/>
-
+                    <p:slider minValue="1" maxValue="4" step="0.5" for="r-input" display="output" onSlideEnd="updatePoints(ui.value)"/>
                     <h:outputText id="output" value="#{pointListBean.point.r}"/>
                 </div>
                 <h:commandButton id="btn">
-                    <p:ajax process="@form" update="form table" listener="#{pointListBean.addPoint}"/>
+                    <p:ajax process="@form" update="form table" listener="#{pointListBean.addPoint}"
+                            oncomplete="addPoint(args.x, args.y, args.r, args.res)"/>
+                </h:commandButton>
+            </h:form>
+
+            <h:form id="svg-form" style="display:none;">
+                <h:inputHidden id="svg-x-input" value="#{pointListBean.point.x}">
+                    <f:converter converterId="javax.faces.Double"/>
+                </h:inputHidden>
+                <h:inputHidden id="svg-y-input" value="#{pointListBean.point.y}">
+                    <f:converter converterId="javax.faces.BigDecimal"/>
+                </h:inputHidden>
+                <h:inputHidden id="svg-r-input" value="#{pointListBean.point.r}">
+                    <f:converter converterId="javax.faces.Double"/>
+                </h:inputHidden>
+                <h:commandButton id="svg-btn">
+                    <p:ajax process="@form" update="table" listener="#{pointListBean.addPoint}"
+                            oncomplete="addPoint(args.x, args.y, args.r, args.res)"/>
                 </h:commandButton>
             </h:form>
         </section>
+
         <section>
             <p:dataTable id="table" styleClass="content" var="point" value="#{pointListBean.pointList}">
-                <p:column sortBy="#{point.x}">
-                    <f:facet name="header">
-                        <h:outputText value="X"/>
-                    </f:facet>
+                <p:column sortBy="#{point.x}" headerText="X">
                     <h:outputText value="#{point.x}"/>
                 </p:column>
 
-                <p:column sortBy="#{point.y}">
-                    <f:facet name="header">
-                        <h:outputText value="Y"/>
-                    </f:facet>
+                <p:column sortBy="#{point.y}" headerText="Y">
                     <h:outputText value="#{point.y}"/>
                 </p:column>
 
-                <p:column sortBy="#{point.r}">
-                    <f:facet name="header">
-                        <h:outputText value="R"/>
-                    </f:facet>
+                <p:column sortBy="#{point.r}" headerText="R">
                     <h:outputText value="#{point.r}"/>
                 </p:column>
 
-                <p:column sortBy="#{point.reqTime}">
-                    <f:facet name="header">
-                        <h:outputText value="reqTime"/>
-                    </f:facet>
+                <p:column sortBy="#{point.reqTime}" headerText="Request Time">
                     <h:outputText value="#{point.reqTime}"/>
                 </p:column>
 
-                <p:column sortBy="#{point.compTime}">
-                    <f:facet name="header">
-                        <h:outputText value="compTime"/>
-                    </f:facet>
+                <p:column sortBy="#{point.compTime}" headerText="Computation Time">
                     <h:outputText value="#{point.compTime} ns"/>
                 </p:column>
 
-                <p:column sortBy="#{point.result}">
-                    <f:facet name="header">
-                        <h:outputText value="Result"/>
-                    </f:facet>
+                <p:column sortBy="#{point.result}" headerText="Result">
                     <h:outputText value="#{point.result}"/>
                 </p:column>
             </p:dataTable>
         </section>
     </section>
-<!--TODO allow y not from (-3;3) for svg click-->
     <h:outputScript library="js" name="svgClick.js"/>
     <h:outputScript library="js" name="svgPoints.js"/>
+    <h:outputScript library="js" name="reload.js"/>
 </ui:composition>

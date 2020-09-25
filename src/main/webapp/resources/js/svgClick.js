@@ -11,7 +11,8 @@ document.getElementById('graph').addEventListener('click', function (e) {
     let svgPoint = htmlCoordinatesPoint.matrixTransform(svg.getScreenCTM().inverse());
     let calcX = r*(svgPoint.x - 200) / 180; //svg coordinates to point coordinates
     let calcY = r*(svgPoint.y-200) / -180;
-    document.getElementById('form:y-input').value = String(calcY);
-    document.getElementById('form:x-input').value = String(calcX);
-    document.getElementById('form:btn').click();
+    document.getElementById('svg-form:svg-y-input').value = String(calcY);
+    document.getElementById('svg-form:svg-x-input').value = String(calcX);
+    document.getElementById('svg-form:svg-r-input').value = r;
+    document.getElementById('svg-form:svg-btn').click();
 });

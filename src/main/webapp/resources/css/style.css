@@ -58,29 +58,12 @@ body {
 }
 
 .input-text {
-    border: 2px solid gray;
+    border: 2px solid teal;
     border-radius: 10%;
 }
 
 .input-text:focus {
     outline: none;
-}
-
-.input-select {
-    border: 2px solid gray;
-    border-radius: 10%;
-}
-
-.input-select:focus {
-    outline: none;
-}
-
-.radio-button {
-    text-align: center;
-}
-
-input[type="radio"]{
-    vertical-align: top;
 }
 
 .input-field {
@@ -116,6 +99,32 @@ input[type="radio"]{
 
 .content {
     margin: 0.5rem;
+}
+
+.main-form {
+    width: 30%
+}
+
+.x-button {
+    flex: 1 1 0;
+    text-align: center;
+    margin:1%;
+    text-decoration: none;
+    color: white;
+    background-color: teal;
+}
+
+.x-button:hover {
+    background-color: #005555;
+}
+
+.x-button:focus {
+    box-shadow: 0 0 0 2px #cbd6ee;
+}
+
+.error-text {
+    text-align: center;
+    color: red;
 }
 
 #time {

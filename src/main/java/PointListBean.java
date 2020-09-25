@@ -8,6 +8,7 @@ public class PointListBean {
     private Point point;
     private List<Point> pointList;
 
+
     public PointListBean() {
         point = new Point();
         pointList = new ArrayList<>();
@@ -20,12 +21,10 @@ public class PointListBean {
         point.setCompTime((System.nanoTime() - start) / 1000);
         pointList.add(point);
         double r = point.getR();
-        String jsFunction = "addPoint(" +
-                point.getX() + "," +
-                point.getY() + "," +
-                point.getR() + "," +
-                point.isResult() + ");";
-        PrimeFaces.current().executeScript(jsFunction);
+        PrimeFaces.current().ajax().addCallbackParam("x", point.getX());
+        PrimeFaces.current().ajax().addCallbackParam("y", point.getY());
+        PrimeFaces.current().ajax().addCallbackParam("r", point.getR());
+        PrimeFaces.current().ajax().addCallbackParam("res", point.isResult());;
         point = new Point();
         point.setR(r);
 }

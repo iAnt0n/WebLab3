@@ -1,13 +1,19 @@
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Entity(name="Point")
+@Table(name="POINTS")
 public class Point {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long id;
+
     private double x;
     private BigDecimal y;
     private double r = 1;
     private boolean result;
     private Date reqTime;
-    private long compTime;
 
     public boolean calculate(){
         BigDecimal bigX = new BigDecimal(x);
@@ -47,10 +53,6 @@ public class Point {
         return reqTime;
     }
 
-    public long getCompTime() {
-        return compTime;
-    }
-
     public void setX(double x) {
         this.x = x;
     }
@@ -67,11 +69,15 @@ public class Point {
         this.reqTime = reqTime;
     }
 
-    public void setCompTime(long compTime) {
-        this.compTime = compTime;
-    }
-
     public void setResult(boolean result) {
         this.result = result;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

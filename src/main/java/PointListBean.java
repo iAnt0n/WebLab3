@@ -1,25 +1,36 @@
 import org.primefaces.PrimeFaces;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PointListBean {
+@Named
+@SessionScoped
+public class PointListBean implements Serializable {
     private Point point;
     private List<Point> pointList;
 
+    @Inject
+    private PointDAOImpl pointDAOImpl;
 
-    public PointListBean() {
+    public PointListBean() {}
+
+    @PostConstruct
+    public void init(){
         point = new Point();
-        pointList = new ArrayList<>();
+        pointList = new ArrayList<>(pointDAOImpl.getPoints());
     }
 
     public void addPoint() {
         point.setReqTime(new Date());
-        long start = System.nanoTime();
         point.setResult(point.calculate());
-        point.setCompTime((System.nanoTime() - start) / 1000);
         pointList.add(point);
+        pointDAOImpl.insertPoint(point);
         double r = point.getR();
         PrimeFaces.current().ajax().addCallbackParam("x", point.getX());
         PrimeFaces.current().ajax().addCallbackParam("y", point.getY());
@@ -46,4 +57,11 @@ public class PointListBean {
         this.pointList = pointList;
     }
 
+    public void setPointDAOImpl(PointDAOImpl pointDAOImpl) {
+        this.pointDAOImpl = pointDAOImpl;
+    }
+
+    public PointDAOImpl getPointDAOImpl() {
+        return pointDAOImpl;
+    }
 }

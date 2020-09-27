@@ -4,12 +4,21 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <managed-bean>
-        <managed-bean-name>pointListBean</managed-bean-name>
-        <managed-bean-class>
-            PointListBean
-        </managed-bean-class>
-        <managed-bean-scope> session </managed-bean-scope>
-    </managed-bean>
+    <navigation-rule>
+        <from-view-id>/content.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>content</from-outcome>
+            <to-view-id>/content.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+  
 </faces-config>

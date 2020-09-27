@@ -5,6 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class PointListBean implements Serializable {
     }
 
     public void addPoint() {
-        point.setReqTime(new Date());
+        point.setReqTime(LocalDateTime.now());
         point.setResult(point.calculate());
         pointList.add(point);
         pointDAOImpl.insertPoint(point);

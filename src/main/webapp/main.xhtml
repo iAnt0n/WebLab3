@@ -109,7 +109,7 @@
                 </div>
                 <h:commandButton id="btn">
                     <p:ajax process="@form" update="form table" listener="#{pointListBean.addPoint}"
-                            oncomplete="addPoint(args.x, args.y, args.r, args.res)"/>
+                            oncomplete="addPoint(args.x, args.y, args.r, args.res, args.r)"/>
                 </h:commandButton>
             </h:form>
 
@@ -146,10 +146,6 @@
 
                 <p:column sortBy="#{point.reqTime}" headerText="Request Time">
                     <h:outputText value="#{point.reqTime}"/>
-                </p:column>
-
-                <p:column sortBy="#{point.compTime}" headerText="Computation Time">
-                    <h:outputText value="#{point.compTime} ns"/>
                 </p:column>
 
                 <p:column sortBy="#{point.result}" headerText="Result">

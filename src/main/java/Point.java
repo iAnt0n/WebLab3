@@ -1,6 +1,8 @@
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 @Entity(name="Point")
 @Table(name="POINTS")
@@ -13,7 +15,7 @@ public class Point {
     private BigDecimal y;
     private double r = 1;
     private boolean result;
-    private Date reqTime;
+    private LocalDateTime reqTime;
 
     public boolean calculate(){
         BigDecimal bigX = new BigDecimal(x);
@@ -49,8 +51,8 @@ public class Point {
         return result;
     }
 
-    public Date getReqTime() {
-        return reqTime;
+    public String getReqTime() {
+        return reqTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM));
     }
 
     public void setX(double x) {
@@ -65,7 +67,7 @@ public class Point {
         this.r = r;
     }
 
-    public void setReqTime(Date reqTime) {
+    public void setReqTime(LocalDateTime reqTime) {
         this.reqTime = reqTime;
     }
 

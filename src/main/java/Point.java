@@ -20,16 +20,16 @@ public class Point {
     public boolean calculate(){
         BigDecimal bigX = new BigDecimal(x);
         BigDecimal bigR = new BigDecimal(r);
-        if (bigX.compareTo(BigDecimal.ZERO) <= 0 && bigX.compareTo(bigR.negate()) >= 0
+        if (bigX.compareTo(BigDecimal.ZERO) >= 0 && bigX.compareTo(bigR) <= 0
                 && y.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(bigR.divide(BigDecimal.valueOf(2))) <= 0) {
             return true;
         }
-        if (bigX.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) <= 0
+        if (bigX.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(BigDecimal.ZERO) <= 0
                 && (bigX.pow(2).add(y.pow(2))).compareTo(bigR.pow(2)) <= 0) {
             return true;
         }
-        if (bigX.compareTo(BigDecimal.ZERO) >= 0 && y.compareTo(BigDecimal.ZERO) <= 0
-                && y.compareTo(bigX.subtract(bigR.divide(BigDecimal.valueOf(2)))) >= 0) {
+        if (bigX.compareTo(BigDecimal.ZERO) <= 0 && y.compareTo(BigDecimal.ZERO) <= 0
+                && y.compareTo(bigX.negate().subtract(bigR.divide(BigDecimal.valueOf(2)))) >= 0) {
             return true;
         }
         return false;

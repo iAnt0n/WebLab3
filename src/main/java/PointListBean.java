@@ -7,7 +7,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Named
@@ -17,28 +16,31 @@ public class PointListBean implements Serializable {
     private List<Point> pointList;
 
     @Inject
-    private PointDAOImpl pointDAOImpl;
+    @Named("PointDAO")
+    private PointDAO pointDAO;
 
     public PointListBean() {}
 
     @PostConstruct
     public void init(){
         point = new Point();
-        pointList = new ArrayList<>(pointDAOImpl.getPoints());
+        pointList = new ArrayList<>(pointDAO.getPoints());
     }
 
     public void addPoint() {
-        point.setReqTime(LocalDateTime.now());
-        point.setResult(point.calculate());
-        pointList.add(point);
-        pointDAOImpl.insertPoint(point);
-        double r = point.getR();
-        PrimeFaces.current().ajax().addCallbackParam("x", point.getX());
-        PrimeFaces.current().ajax().addCallbackParam("y", point.getY());
-        PrimeFaces.current().ajax().addCallbackParam("r", point.getR());
-        PrimeFaces.current().ajax().addCallbackParam("res", point.isResult());;
-        point = new Point();
-        point.setR(r);
+        if (Validator.isValid(point.getX(), point.getY(), point.getR())) {
+            point.setReqTime(LocalDateTime.now());
+            point.setResult(point.calculate());
+            pointList.add(point);
+            pointDAO.insertPoint(point);
+            double r = point.getR();
+            PrimeFaces.current().ajax().addCallbackParam("x", point.getX());
+            PrimeFaces.current().ajax().addCallbackParam("y", point.getY());
+            PrimeFaces.current().ajax().addCallbackParam("r", point.getR());
+            PrimeFaces.current().ajax().addCallbackParam("res", point.isResult());
+            point = new Point();
+            point.setR(r);
+        }
 }
 
 
@@ -58,11 +60,11 @@ public class PointListBean implements Serializable {
         this.pointList = pointList;
     }
 
-    public void setPointDAOImpl(PointDAOImpl pointDAOImpl) {
-        this.pointDAOImpl = pointDAOImpl;
+    public void setPointDAO(PointDAOImpl pointDAO) {
+        this.pointDAO = pointDAO;
     }
 
-    public PointDAOImpl getPointDAOImpl() {
-        return pointDAOImpl;
+    public PointDAO getPointDAO() {
+        return pointDAO;
     }
 }

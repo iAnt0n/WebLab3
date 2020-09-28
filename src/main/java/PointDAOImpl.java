@@ -6,7 +6,7 @@ import javax.transaction.UserTransaction;
 import java.io.Serializable;
 import java.util.List;
 
-@Named
+@Named("PointDAO")
 @SessionScoped
 public class PointDAOImpl implements PointDAO, Serializable {
     @PersistenceUnit

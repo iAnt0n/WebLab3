@@ -1,10 +1,12 @@
+package model;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-@Entity(name="Point")
+@Entity(name="model.Point")
 @Table(name="POINTS")
 public class Point {
     @Id

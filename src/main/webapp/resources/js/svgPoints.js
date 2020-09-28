@@ -7,9 +7,9 @@ function addPoint(_x, _y, _r, _result) {
     let r = Number(_r);
     let color;
     if (typeof _result === "boolean") {
-        color = _result ? "green" : "red";
+        color = _result ? "#FFE500" : "red";
     }
-    else color = _result==='true' ? "green" : "red";
+    else color = _result==='true' ? "#FFE500" : "red";
     let dot = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     dot.setAttribute("r", "3");
     dot.setAttribute("cx", String(200 + x * 180/r));

@@ -1,3 +1,7 @@
+package utils;
+
+import model.Point;
+
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -6,7 +10,7 @@ import javax.transaction.UserTransaction;
 import java.io.Serializable;
 import java.util.List;
 
-@Named("PointDAO")
+@Named("utils.PointDAO")
 @SessionScoped
 public class PointDAOImpl implements PointDAO, Serializable {
     @PersistenceUnit
@@ -37,6 +41,6 @@ public class PointDAOImpl implements PointDAO, Serializable {
     @Override
     public List<Point> getPoints() {
         EntityManager em = entityManagerFactory.createEntityManager();
-        return (List<Point>) em.createQuery("SELECT p from Point p").getResultList();
+        return (List<Point>) em.createQuery("SELECT p from model.Point p").getResultList();
     }
 }

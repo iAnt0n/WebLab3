@@ -1,3 +1,7 @@
+package utils;
+
+import model.Point;
+
 import java.util.List;
 
 public interface PointDAO {

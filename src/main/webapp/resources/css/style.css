@@ -15,7 +15,7 @@ body {
     flex: 0 0 auto;
     display: flex;
     justify-content: space-between;
-    background: teal;
+    background: #6ABF0B;
     color: white;
 }
 
@@ -30,7 +30,7 @@ body {
 .footer {
     flex: 0 0 auto;
     text-align: center;
-    background-color: teal;
+    background-color: #6ABF0B;
     vertical-align: center;
 }
 
@@ -54,11 +54,11 @@ body {
 }
 
 .graph:hover {
-    box-shadow: 0 0 10px teal;
+    box-shadow: 0 0 10px #6ABF0B;
 }
 
 .input-text {
-    border: 2px solid teal;
+    border: 2px solid #6ABF0B;
     border-radius: 10%;
 }
 
@@ -74,27 +74,14 @@ body {
 .input-header {
     text-align: center;
     font-weight: bold;
+    color: #8C0C7F;
 }
 
 .submit-button {
-    background-color: teal;
-    color: white;
+    background-color: #6ABF0B;
+    color: #8C0C7F;
     border-radius: 10%;
-}
-
-.neutral {
-    color: gray;
-    border-color: gray;
-}
-
-.invalid {
-    color: #8b3838;
-    border-color: #8b3838;
-}
-
-.valid {
-    color: teal;
-    border-color: teal;
+    font-size: 1em;
 }
 
 .content {
@@ -111,14 +98,10 @@ body {
     margin:1%;
     text-decoration: none;
     color: white;
-    background-color: teal;
+    background-color: #6ABF0B;
 }
 
 .x-button:hover {
-    background-color: #005555;
-}
-
-.x-button:focus {
     box-shadow: 0 0 0 2px #cbd6ee;
 }
 
@@ -129,8 +112,8 @@ body {
 
 #time {
     font-size: 3rem;
-    background-color: rgb(217,142,142);
-    border: 1px solid rgb(217,142,142);
+    background-color: #8C0C7F;
+    border: 1px solid #8C0C7F;
     border-radius: 10%;
     font-family: monospace;
     padding: 0 1%;
@@ -139,8 +122,8 @@ body {
 #date {
     font-size: 1rem;
     font-weight: bold;
-    background-color: rgb(217,142,142);
-    border: 1px solid rgb(217,142,142);
+    background-color: #8C0C7F;
+    border: 1px solid #8C0C7F;
     border-radius: 0 0 10% 10%;
     font-family: monospace;
     padding: 0 1%;
@@ -155,7 +138,7 @@ body {
 }
 
 .ui-slider .ui-slider-handle {
-    background-color: teal;
+    background-color: #6ABF0B;
     box-shadow: none;
 }
 
@@ -164,26 +147,30 @@ body {
 }
 
 .ui-datatable-even {
-    background-color: rgb(217,142,142);
+    background-color: #8C0C7F;
     color: white;
-    border-color: #8b3838;
+    border-color: #6ABF0B;
 }
 
 .ui-datatable-odd {
-    background: rgb(217,142,142);
+    background: #8C0C7F;
     color: white;
-    border-color: #8b3838;
+    border-color: #6ABF0B;
 }
 
 .ui-datatable-even {
-    background: rgb(217,142,142);
+    background: #8C0C7F;
     color: white;
-    border-color: #8b3838;
+    border-color: #6ABF0B;
+}
+
+.ui-datatable-odd:nth-child(1), .ui-datatable-odd:nth-child(2), .ui-datatable-even:nth-child(1), .ui-datatable-even:nth-child(2) {
+    word-break: break-all;
 }
 
 .ui-sortable-column {
-    background: rgb(217,142,142);
+    background: #8C0C7F;
     color: white;
-    border-color: #8b3838;
+    border-color: #6ABF0B;
     box-shadow: none;
 }

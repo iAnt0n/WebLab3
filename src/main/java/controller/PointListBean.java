@@ -1,4 +1,10 @@
+package controller;
+
+import model.Point;
 import org.primefaces.PrimeFaces;
+import utils.PointDAO;
+import utils.PointDAOImpl;
+import utils.Validator;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -16,7 +22,7 @@ public class PointListBean implements Serializable {
     private List<Point> pointList;
 
     @Inject
-    @Named("PointDAO")
+    @Named("utils.PointDAO")
     private PointDAO pointDAO;
 
     public PointListBean() {}

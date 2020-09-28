@@ -34,12 +34,12 @@
                 <text class="point-text" x="207" y="115">R/2</text>
                 <text class="point-text" x="207" y="25">R</text>
 
-                <polygon class="rectangle-graph" fill="teal"
-                         fill-opacity="0.3" points="20,200 20,110 200,110 200,200" stroke="teal"/>
-                <polygon class="triangle-graph" fill="teal"
-                         fill-opacity="0.3" points="290,200 200,290 200,200" stroke="teal"/>
-                <path class="circle-graph" d="M 20 200 A 180 180 0 0 0 200 380 L 200 200 Z"
-                      fill="teal" fill-opacity="0.3" stroke="teal"/>
+                <polygon class="rectangle-graph" fill="#8C0C7F"
+                         fill-opacity="0.5" points="380,200 380,110 200,110 200,200" stroke="#8C0C7F"/>
+                <polygon class="triangle-graph" fill="#8C0C7F"
+                         fill-opacity="0.5" points="110,200 200,290 200,200" stroke="#8C0C7F"/>
+                <path class="circle-graph" d="M 200 380 A 180 180 0 0 0 380 200 L 200 200 Z"
+                      fill="#8C0C7F" fill-opacity="0.5" stroke="#8C0C7F"/>
             </svg>
 
 
@@ -48,48 +48,50 @@
                     <span class="input-header">X value</span>
                     <div class="flex-centered">
                         <h:commandLink styleClass="x-button" value="-5" action="#{pointListBean.point.setX(-5)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="-4" action="#{pointListBean.point.setX(-4)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="-3" action="#{pointListBean.point.setX(-3)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="-2" action="#{pointListBean.point.setX(-2)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="-1" action="#{pointListBean.point.setX(-1)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
-                        <h:commandLink styleClass="x-button" value="0" action="#{pointListBean.point.setX(0)}">
-                            <f:ajax/>
+                        <h:commandLink styleClass="x-button active" value="0" action="#{pointListBean.point.setX(0)}">
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="1" action="#{pointListBean.point.setX(1)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/><f:ajax/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="2" action="#{pointListBean.point.setX(2)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
 
                         <h:commandLink styleClass="x-button" value="3" action="#{pointListBean.point.setX(3)}">
-                            <f:ajax/>
+                            <f:ajax render="x-output"/>
                         </h:commandLink>
                     </div>
+                    <h:outputText id="x-output" styleClass="input-header" value="X = #{pointListBean.point.x}"/>
                 </div>
 
                 <div class="input-field">
-                    <h:outputLabel for="y-input" styleClass="input-header">Y value</h:outputLabel>
-                    <h:inputText id="y-input" styleClass="input-text" value="#{pointListBean.point.y}" placeholder="(-3;3)" required="true"
+                    <h:outputLabel for="y-input" styleClass="input-header">Y value (-3;3)</h:outputLabel>
+                    <h:inputText id="y-input" styleClass="input-text" value="#{pointListBean.point.y}"
+                                 placeholder="(-3;3)" required="true"
                                  converterMessage="Y must be a number" requiredMessage="Mandatory field"
-                                 autocomplete="off" widgetVar="y-input">
+                                 autocomplete="off">
                         <f:converter converterId="javax.faces.BigDecimal"/>
                         <f:validator validatorId="bigDecimalValidator"/>
                         <f:attribute name="min" value="-3"/>
@@ -104,10 +106,13 @@
                     <p:inputText type="hidden" id="r-input" value="#{pointListBean.point.r}">
                         <f:converter converterId="javax.faces.Double"/>
                     </p:inputText>
-                    <p:slider minValue="1" maxValue="4" step="0.5" for="r-input" display="output" onSlideEnd="updatePoints(ui.value)"/>
-                    <h:outputText id="output" value="#{pointListBean.point.r}"/>
+                    <p:slider minValue="1" maxValue="4" step="0.5" for="r-input" display="r-output"
+                              displayTemplate="R = {value}" onSlideEnd="updatePoints(ui.value)">
+                        <p:ajax event="slideEnd" process="r-input"/>
+                    </p:slider>
+                    <h:outputText id="r-output" styleClass="input-header" value="R = #{pointListBean.point.r}"/>
                 </div>
-                <h:commandButton id="btn">
+                <h:commandButton styleClass="submit-button" id="btn" value="Submit">
                     <p:ajax process="@form" update="form table" listener="#{pointListBean.addPoint}"
                             oncomplete="addPoint(args.x, args.y, args.r, args.res, args.r)"/>
                 </h:commandButton>

@@ -43,6 +43,10 @@
             </svg>
 
 
+            <h:outputScript library="js" name="reload.js"/>
+            <h:outputScript library="js" name="svgClick.js"/>
+            <h:outputScript library="js" name="svgPoints.js"/>
+
             <h:form id="form" class="flex-evenly flex-vertical content main-form">
                 <div class="input-field">
                     <span class="input-header">X value</span>
@@ -114,7 +118,7 @@
                 </div>
                 <h:commandButton styleClass="submit-button" id="btn" value="Submit">
                     <p:ajax process="@form" update="form table" listener="#{pointListBean.addPoint}"
-                            oncomplete="addPoint(args.x, args.y, args.r, args.res, args.r)"/>
+                            oncomplete="redrawPoints()"/>
                 </h:commandButton>
             </h:form>
 
@@ -130,7 +134,7 @@
                 </h:inputHidden>
                 <h:commandButton id="svg-btn">
                     <p:ajax process="@form" update="table" listener="#{pointListBean.addPoint}"
-                            oncomplete="addPoint(args.x, args.y, args.r, args.res)"/>
+                            oncomplete="redrawPoints()"/>
                 </h:commandButton>
             </h:form>
         </section>
@@ -150,7 +154,9 @@
                 </p:column>
 
                 <p:column sortBy="#{point.reqTime}" headerText="Request Time">
-                    <h:outputText value="#{point.reqTime}"/>
+                    <h:outputText value="#{point.reqTime}">
+                        <f:converter converterId="localDateTimeConverter"/>
+                    </h:outputText>
                 </p:column>
 
                 <p:column sortBy="#{point.result}" headerText="Result">
@@ -159,7 +165,5 @@
             </p:dataTable>
         </section>
     </section>
-    <h:outputScript library="js" name="svgClick.js"/>
-    <h:outputScript library="js" name="svgPoints.js"/>
-    <h:outputScript library="js" name="reload.js"/>
+
 </ui:composition>

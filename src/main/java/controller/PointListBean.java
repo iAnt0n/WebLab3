@@ -39,11 +39,12 @@ public class PointListBean implements Serializable {
             point.setResult(point.calculate());
             pointList.add(point);
             pointDAO.insertPoint(point);
+            pointList = pointDAO.getPoints();
             double r = point.getR();
-            PrimeFaces.current().ajax().addCallbackParam("x", point.getX());
-            PrimeFaces.current().ajax().addCallbackParam("y", point.getY());
-            PrimeFaces.current().ajax().addCallbackParam("r", point.getR());
-            PrimeFaces.current().ajax().addCallbackParam("res", point.isResult());
+//            PrimeFaces.current().ajax().addCallbackParam("x", point.getX());
+//            PrimeFaces.current().ajax().addCallbackParam("y", point.getY());
+//            PrimeFaces.current().ajax().addCallbackParam("r", point.getR());
+//            PrimeFaces.current().ajax().addCallbackParam("res", point.isResult());
             point = new Point();
             point.setR(r);
         }

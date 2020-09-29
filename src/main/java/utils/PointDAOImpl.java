@@ -28,7 +28,7 @@ public class PointDAOImpl implements PointDAO, Serializable {
             em.persist(point);
             transaction.commit();
         }
-        catch (Exception e){
+        catch (Exception e) {
             try {
                 transaction.rollback();
             }

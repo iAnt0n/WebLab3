@@ -53,8 +53,8 @@ public class Point {
         return result;
     }
 
-    public String getReqTime() {
-        return reqTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM));
+    public LocalDateTime getReqTime() {
+        return reqTime;
     }
 
     public void setX(double x) {
